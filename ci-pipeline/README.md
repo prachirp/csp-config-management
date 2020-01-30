@@ -3,7 +3,7 @@
 This is an example for how to trigger a CloudBuild CI pipeline on a config directory.
 We will ensure all namespaces have a cost-center label to adhere to the OPA Gatekeeper constraint.
 
-See [our documentation](https://cloud.google.com/anthos-config-management/docs/how-to/validating-configs) for how to set up this example.
+See [our documentation](https://cloud.google.com/anthos-config-management/docs/how-to/policy-agent-ci-pipeline) for how to set up this example.
 
 ## Config Overview
 
@@ -11,7 +11,7 @@ This repository contains the following files.
 
 ```console
 ci-pipeline/
-├── ci-pipeline.yaml # CloudBuild configuration file with which to set up a trigger
+├── cloudbuild.yaml # CloudBuild configuration file with which to set up a trigger
 ├── config-root
 │   ├── cluster
 │   │   ├── fulfillmentcenter-crd.yaml
