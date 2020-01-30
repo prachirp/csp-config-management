@@ -28,8 +28,8 @@ steps:
   env:
   - 'KUBECONFIG=/kube/config'
 # Recursively read a directory of kubernetes YAML configs from the workspace and output them as one list into config-source.yaml.
-- name: 'gcr.io/kpt-functions/read-yaml:latest'
+- name: 'gcr.io/config-management-release/read-yaml:latest'
   args: ['--input', '/dev/null', '-d', 'source_dir=/workspace/hydrated-configs', '--output', '/workspace/config-source.yaml']
 # Validate input configs against any OPA ConstraintTemplates and Constraints it finds in its input.
-- name: 'gcr.io/kpt-functions/gatekeeper-validate:demo'
+- name: 'gcr.io/config-management-release/gatekeeper-validate:demo'
   args: ['--input', '/workspace/config-source.yaml']
