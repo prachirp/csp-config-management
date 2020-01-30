@@ -7,8 +7,8 @@ steps:
     path: '/kube'
   env:
   - 'KUBECONFIG=/kube/config'
-  - 'CLOUDSDK_COMPUTE_ZONE=ZONE'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=CLUSTER_NAME'
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=foo-corp-configs-cluster'
   - 'CLOUDSDK_CONTAINER_USE_APPLICATION_DEFAULT_CREDENTIALS=true'
 # Grant read permissions to the kubeconfig file.
 - name: 'bash'
