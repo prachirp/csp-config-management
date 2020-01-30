@@ -6,5 +6,5 @@ steps:
 - name: 'gcr.io/config-management-release/read-yaml:latest'
   args: ['--input', '/dev/null', '-d', 'source_dir=/workspace/ci-pipeline-unstructured/config-root', '--output', '/workspace/config-source.yaml']
 # Validate input configs against any OPA ConstraintTemplates and Constraints it finds in its input.
-- name: 'gcr.io/config-management-release/gatekeeper-validate:demo'
+- name: 'gcr.io/config-management-release/policy-controller-validate:latest'
   args: ['--input', '/workspace/config-source.yaml']
