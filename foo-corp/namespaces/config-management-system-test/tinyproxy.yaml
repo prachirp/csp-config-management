@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: tinyproxy
+  name: tinyproxy
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tinyproxy-deployment
+spec:
+  selector:
+    matchLabels:
+      app: tinyproxy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tinyproxy
+    spec:
+      containers:
+      - name: tinyproxy
+        image: gcr.io/stolos-dev/tinyproxy:latest
+        ports:
+        - containerPort: 8888
+      serviceAccount: tinyproxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tinyproxy-service
+spec:
+  selector:
+    app: tinyproxy
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 8888
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: tinyproxy
+  name: tinyproxy
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app: tinyproxy
+  name: tinyproxy
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: tinyproxy
+subjects:
+- kind: ServiceAccount
+  name: tinyproxy
+  namespace: config-management-system-test
+
